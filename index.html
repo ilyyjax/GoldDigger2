@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GoldDigger</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Pixel font fallback: included as system fallback; replace with a woff in assets if desired -->
+  <style>
+    @font-face {
+      font-family: 'Pixel';
+      src: local("Press Start 2P"), local("Courier New");
+      font-weight: normal;
+      font-style: normal;
+    }
+  </style>
+</head>
+<body>
+  <div id="loading-screen" role="dialog" aria-label="Loading game">
+    <h1 id="logo">GoldDigger</h1>
+    <div id="loader"><div id="loader-bar"></div></div>
+    <div id="loading-text">Loading assets...</div>
+    <button id="continue-btn" aria-label="Start game" hidden>Start</button>
+  </div>
+
+  <div id="game-root" hidden>
+    <!-- Canvases stacked for performance -->
+    <canvas id="bg-canvas" class="layer" aria-hidden="true"></canvas>
+    <canvas id="parallax-canvas" class="layer" aria-hidden="true"></canvas>
+    <canvas id="tile-canvas" class="layer" aria-hidden="true"></canvas>
+    <canvas id="entity-canvas" class="layer" aria-hidden="true"></canvas>
+    <canvas id="light-canvas" class="layer" aria-hidden="true"></canvas>
+
+    <!-- Foreground UI (DOM) -->
+    <div id="ui">
+      <div id="topbar">
+        <div id="money" aria-live="polite">Money: $0</div>
+        <div id="depth" aria-live="polite">Depth: 0</div>
+        <div id="energy" aria-live="polite">Energy: 100%</div>
+        <div id="controls">
+          <button id="shop-btn" aria-label="Open shop">Shop</button>
+          <button id="sell-btn" aria-label="Sell all">Sell All</button>
+          <button id="mute-btn" aria-label="Toggle sound">Mute</button>
+          <label class="motion-toggle"><input id="motion-toggle" type="checkbox" checked/> Animations</label>
+        </div>
+      </div>
+
+      <div id="left-panel" role="region" aria-label="Inventory">
+        <h3>Inventory</h3>
+        <ul id="inventory-list" aria-live="polite"></ul>
+        <div id="backpack-info">Capacity: 10</div>
+      </div>
+
+      <div id="shop" aria-hidden="true" role="dialog" aria-label="Shop">
+        <div id="shop-header">
+          <h3>Shop</h3>
+          <button id="close-shop">Close</button>
+        </div>
+        <div id="shop-items"></div>
+      </div>
+
+      <!-- Mobile controls -->
+      <div id="mobile-controls" aria-hidden="true">
+        <button class="mob-btn" id="left-btn" aria-label="Move left">◀</button>
+        <button class="mob-btn" id="down-btn" aria-label="Move down">▼</button>
+        <button class="mob-btn" id="right-btn" aria-label="Move right">▶</button>
+        <button class="mob-btn" id="mine-btn" aria-label="Mine">Mine</button>
+      </div>
+
+      <!-- Info & floating text container -->
+      <div id="fx-layer" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
